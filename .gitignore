@@ -9,10 +9,10 @@
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
-ExcavatorVR/Assets/*
-!ExcavatorVR/Assets/MachineProject/ExternalAssets/*
+Assets/*
+Assets/MachineProject/ExternalAssets/*
 # unignore own assets
-!ExcavatorVR/Assets/MachineProject/
+!Assets/MachineProject/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
