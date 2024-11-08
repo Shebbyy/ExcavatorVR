@@ -316,6 +316,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 51408063730368263, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: m_Name
+      value: DriveControlRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822220524197646183, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: m_Name
+      value: DriveControlLeft
+      objectReference: {fileID: 0}
     - target: {fileID: 2897614016950758228, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
       propertyPath: m_IsActive
       value: 1
