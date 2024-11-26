@@ -47,7 +47,6 @@
   <ItemGroup>
      <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\MachineProject\ExternalAssets\Loading Games\Toon City Pack\Demo\Scripts\Helicopter.cs" />
-     <Compile Include="Assets\MachineProject\CustomScripts\GrabbableObject.cs" />
      <Compile Include="Assets\MachineProject\ExternalAssets\Low Poly Heavy Machinery Pack Demo\Scripts\OpenLinkOnButtonClick.cs" />
      <Compile Include="Assets\Scripts\MyAudio.cs" />
      <Compile Include="Assets\Scripts\SceneSwap.cs" />
@@ -62,6 +61,7 @@
      <Compile Include="Assets\Scripts\NumberWizard.cs" />
      <Compile Include="Assets\MachineProject\CustomScripts\VehicleControls\MachineTrackBasedControls.cs" />
      <Compile Include="Assets\MachineProject\ExternalAssets\Loading Games\Toon City Pack\Demo\Scripts\TrafficLights.cs" />
+     <Compile Include="Assets\MachineProject\CustomScripts\UpdateCircularRememberedPosToHinge.cs" />
      <Compile Include="Assets\MachineProject\CustomScripts\VehicleControls\MachineVehicleControls.cs" />
      <Compile Include="Assets\MachineProject\ExternalAssets\Loading Games\Toon City Pack\Demo\Scripts\PoliceSiren.cs" />
      <Compile Include="Assets\Scripts\CollisionLogger.cs" />
@@ -868,20 +868,17 @@
      <Reference Include="Unity.EditorCoroutines.Editor">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.PlasticSCM.Editor">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="UnityEngine.XR.LegacyInputHelpers">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.PlasticSCM.Editor">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Timeline.Editor">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Shared.Editor">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualStudio.Editor">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
      </Reference>
      <Reference Include="UnityEditor.SpatialTracking">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEditor.SpatialTracking.dll</HintPath>
@@ -892,20 +889,23 @@
      <Reference Include="Unity.VisualScripting.Core">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
      </Reference>
-     <Reference Include="UnityEngine.UI">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VisualScripting.Core.Editor">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
      </Reference>
      <Reference Include="UnityEngine.SpatialTracking">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEngine.SpatialTracking.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+     </Reference>
      <Reference Include="UnityEditor.XR.LegacyInputHelpers">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualStudio.Editor">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Flow">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
@@ -969,13 +969,13 @@
       <Project>{07a508e8-1a6b-968c-6ae1-dddb8a731df6}</Project>
       <Name>SteamVR_Actions</Name>
     </ProjectReference>
-    <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
-      <Project>{1c7e7cb5-e834-2d64-6776-146447957a75}</Project>
-      <Name>SteamVR_Windows_EditorHelper</Name>
-    </ProjectReference>
     <ProjectReference Include="SteamVR_Input_Editor.csproj">
       <Project>{b4324d4a-4168-9ed0-407c-6b9f31c904b0}</Project>
       <Name>SteamVR_Input_Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
+      <Project>{1c7e7cb5-e834-2d64-6776-146447957a75}</Project>
+      <Name>SteamVR_Windows_EditorHelper</Name>
     </ProjectReference>
     <ProjectReference Include="SteamVR_Editor.csproj">
       <Project>{a734a1d3-b03b-2ccc-1040-c80e8e85f010}</Project>

@@ -312,6 +312,9 @@
      <Reference Include="ReportGeneratorMerged">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
      </Reference>
+     <Reference Include="unityplastic">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.collab-proxy@2.5.2\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.Plastic.Antlr3.Runtime">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.collab-proxy@2.5.2\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
      </Reference>
@@ -329,9 +332,6 @@
      </Reference>
      <Reference Include="Unity.VisualScripting.TextureAssets">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.visualscripting@1.9.0\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-     </Reference>
-     <Reference Include="unityplastic">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.collab-proxy@2.5.2\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
      </Reference>
      <Reference Include="Valve.Newtonsoft.Json">
      <HintPath>G:\VR Experiments\ExcavatorVR\Assets\SteamVR\Input\Plugins\JSON.NET\Valve.Newtonsoft.Json.dll</HintPath>

@@ -102,8 +102,8 @@
      <Compile Include="Assets\SteamVR\InteractionSystem\Samples\Scripts\CustomSkeletonHelper.cs" />
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_Camera.cs" />
      <Compile Include="Assets\SteamVR\InteractionSystem\Longbow\Scripts\ArrowHand.cs" />
-     <Compile Include="Assets\SteamVR\Input\SteamVR_Input_ActionScopes.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
+     <Compile Include="Assets\SteamVR\Input\SteamVR_Input_ActionScopes.cs" />
      <Compile Include="Assets\SteamVR\InteractionSystem\Core\Scripts\HandPhysics.cs" />
      <Compile Include="Assets\SteamVR\InteractionSystem\Core\Scripts\LinearAnimation.cs" />
      <Compile Include="Assets\SteamVR\InteractionSystem\Core\Scripts\LinearBlendshape.cs" />
@@ -120,8 +120,8 @@
      <Compile Include="Assets\SteamVR\Input\BehaviourUnityEvents\SteamVR_Behaviour_Pose_ConnectedChangedEvent.cs" />
      <Compile Include="Assets\SteamVR\InteractionSystem\Core\Scripts\VelocityEstimator.cs" />
      <Compile Include="Assets\SteamVR\InteractionSystem\Samples\Squishy\SquishyToy.cs" />
-     <Compile Include="Assets\SteamVR\InteractionSystem\Core\Scripts\LinearMapping.cs" />
      <Compile Include="Assets\SteamVR\InteractionSystem\Core\Scripts\Unparent.cs" />
+     <Compile Include="Assets\SteamVR\InteractionSystem\Core\Scripts\LinearMapping.cs" />
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_Overlay.cs" />
      <Compile Include="Assets\SteamVR\Input\BehaviourUnityEvents\SteamVR_Behaviour_Skeleton_TrackingChangedEvent.cs" />
      <Compile Include="Assets\SteamVR\Input\SteamVR_Behaviour_SkeletonCustom.cs" />
@@ -594,6 +594,9 @@
      <Reference Include="ReportGeneratorMerged">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
      </Reference>
+     <Reference Include="unityplastic">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.collab-proxy@2.5.2\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.Plastic.Antlr3.Runtime">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.collab-proxy@2.5.2\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
      </Reference>
@@ -611,9 +614,6 @@
      </Reference>
      <Reference Include="Unity.VisualScripting.TextureAssets">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.visualscripting@1.9.0\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-     </Reference>
-     <Reference Include="unityplastic">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\PackageCache\com.unity.collab-proxy@2.5.2\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
      </Reference>
      <Reference Include="Valve.Newtonsoft.Json">
      <HintPath>G:\VR Experiments\ExcavatorVR\Assets\SteamVR\Input\Plugins\JSON.NET\Valve.Newtonsoft.Json.dll</HintPath>

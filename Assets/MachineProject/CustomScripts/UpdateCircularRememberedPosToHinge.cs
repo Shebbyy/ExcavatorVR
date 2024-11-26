@@ -5,16 +5,19 @@ using Valve.VR.InteractionSystem;
 
 namespace MachineProject.CustomScripts
 {
-    public class GrabbableObject : MonoBehaviour
+    public class UpdateCircularRememberedPosToHinge : MonoBehaviour
     {
         
         protected Interactable interactable;
+        protected CircularDrive circularDrive;
+        protected LinearMapping linearMapping;
         protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.DetachFromOtherHand;
         
         // Start is called before the first frame update
         void Start()
         {
             interactable = GetComponent<Interactable>();
+            circularDrive = GetComponent<CircularDrive>();
         }
         
         // SteamVR Event, wenn vom Hover zum grabben übergegangen wird
@@ -24,6 +27,10 @@ namespace MachineProject.CustomScripts
 
             if (interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
             {
+                // todo get current rotation to keep lever at position
+                //circularDrive.outAngle = transform.localRotation.x;
+                circularDrive.outAngle = 0;
+                // todo adjust hand position so its on the handle
                 hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
             }
         }
@@ -40,7 +47,6 @@ namespace MachineProject.CustomScripts
         // Update is called once per frame
         void Update()
         {
-            // Hier sollte dann immer die Position von der Hand gepollt werden und das Objekt zum nähesten Punkt nachziehen; TODO
         }
     }
 }

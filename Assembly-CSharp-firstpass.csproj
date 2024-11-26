@@ -60,8 +60,8 @@
      <Compile Include="Assets\Standard Assets\Utility\LerpControlledBob.cs" />
      <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\Displace.cs" />
      <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\ExtinguishableParticleSystem.cs" />
-     <Compile Include="Assets\Standard Assets\Cameras\Scripts\FreeLookCam.cs" />
      <Compile Include="Assets\Standard Assets\Characters\RollerBall\Scripts\Ball.cs" />
+     <Compile Include="Assets\Standard Assets\Cameras\Scripts\FreeLookCam.cs" />
      <Compile Include="Assets\Standard Assets\2D\Scripts\Platformer2DUserControl.cs" />
      <Compile Include="Assets\Standard Assets\Cameras\Scripts\LookatTarget.cs" />
      <Compile Include="Assets\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
@@ -79,8 +79,8 @@
      <Compile Include="Assets\Standard Assets\2D\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Standard Assets\Vehicles\Car\Scripts\WheelEffects.cs" />
      <Compile Include="Assets\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
-     <Compile Include="Assets\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
      <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
+     <Compile Include="Assets\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
      <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
      <Compile Include="Assets\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
@@ -95,8 +95,8 @@
      <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
      <Compile Include="Assets\Standard Assets\Utility\CameraRefocus.cs" />
      <Compile Include="Assets\Standard Assets\Utility\TimedObjectActivator.cs" />
-     <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
      <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
+     <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
      <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
      <Compile Include="Assets\Standard Assets\Vehicles\Car\Scripts\Suspension.cs" />
      <Compile Include="Assets\Standard Assets\Environment\Water\Water\Scripts\MeshContainer.cs" />
@@ -944,20 +944,17 @@
      <Reference Include="Unity.EditorCoroutines.Editor">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.PlasticSCM.Editor">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="UnityEngine.XR.LegacyInputHelpers">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.PlasticSCM.Editor">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Timeline.Editor">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Shared.Editor">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualStudio.Editor">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
      </Reference>
      <Reference Include="UnityEditor.SpatialTracking">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEditor.SpatialTracking.dll</HintPath>
@@ -968,20 +965,23 @@
      <Reference Include="Unity.VisualScripting.Core">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
      </Reference>
-     <Reference Include="UnityEngine.UI">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VisualScripting.Core.Editor">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
      </Reference>
      <Reference Include="UnityEngine.SpatialTracking">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEngine.SpatialTracking.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+     </Reference>
      <Reference Include="UnityEditor.XR.LegacyInputHelpers">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualStudio.Editor">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Flow">
      <HintPath>G:\VR Experiments\ExcavatorVR\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
@@ -1041,13 +1041,13 @@
       <Project>{07a508e8-1a6b-968c-6ae1-dddb8a731df6}</Project>
       <Name>SteamVR_Actions</Name>
     </ProjectReference>
-    <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
-      <Project>{1c7e7cb5-e834-2d64-6776-146447957a75}</Project>
-      <Name>SteamVR_Windows_EditorHelper</Name>
-    </ProjectReference>
     <ProjectReference Include="SteamVR_Input_Editor.csproj">
       <Project>{b4324d4a-4168-9ed0-407c-6b9f31c904b0}</Project>
       <Name>SteamVR_Input_Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
+      <Project>{1c7e7cb5-e834-2d64-6776-146447957a75}</Project>
+      <Name>SteamVR_Windows_EditorHelper</Name>
     </ProjectReference>
     <ProjectReference Include="SteamVR_Editor.csproj">
       <Project>{a734a1d3-b03b-2ccc-1040-c80e8e85f010}</Project>
