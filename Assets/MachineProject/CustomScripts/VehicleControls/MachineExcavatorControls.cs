@@ -9,13 +9,13 @@ namespace MachineProject.CustomScripts.VehicleControls
         // Start is called before the first frame update
         void Start()
         {
-        
+            InitTrackMovementVars();
         }
 
         // Update is called once per frame
         void Update()
         {
-        
+            HandleTrackMovement();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,8 @@ namespace MachineProject.CustomScripts
         
         protected Interactable interactable;
         protected CircularDrive circularDrive;
-        protected LinearMapping linearMapping;
         protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.DetachFromOtherHand;
+        private bool isAttached = false;
         
         // Start is called before the first frame update
         void Start()
@@ -27,6 +28,7 @@ namespace MachineProject.CustomScripts
 
             if (interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
             {
+                isAttached = true;
                 // todo get current rotation to keep lever at position
                 //circularDrive.outAngle = transform.localRotation.x;
                 circularDrive.outAngle = 0;
@@ -41,12 +43,17 @@ namespace MachineProject.CustomScripts
             if (hand.IsGrabEnding(this.gameObject))
             {
                 hand.DetachObject(gameObject);
+                isAttached = false;
             }
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (   !isAttached
+                && MathF.Abs(transform.localEulerAngles.x) >= 0.02 ) {
+                transform.SetLocalPositionAndRotation(transform.localPosition, Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0f, 0f, 0f), 1.0f * Time.deltaTime));
+            }
         }
     }
 }
