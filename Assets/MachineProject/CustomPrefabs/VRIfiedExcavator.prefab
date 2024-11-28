@@ -2512,6 +2512,18 @@ MonoBehaviour:
   controllerLocalAxis: 0
   velocity: 0.5
   leverDeadZone: 0.2
+  leftJoystick: {fileID: 1680098010545622410}
+  rightJoystick: {fileID: 6066713652130299808}
+  arm1: {fileID: 3409657277816794421}
+  arm2: {fileID: 6400599018187756831}
+  bucket: {fileID: 3736623205553331755}
+  upperBody: {fileID: 2562159858898170238}
+  arm1MaxRotation: 54
+  arm1MinRotation: 0
+  arm2MaxRotation: 32
+  arm2MinRotation: -80
+  bucketMaxRotation: 70
+  bucketMinRotation: -50
 --- !u!1001 &416850282981843933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2584,6 +2596,11 @@ PrefabInstance:
 --- !u!4 &5618962909806237502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202330338738566371, guid: f52d572332a26bd4a9ed91aa2476f4f5, type: 3}
+  m_PrefabInstance: {fileID: 416850282981843933}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6066713652130299808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5906955743522348157, guid: f52d572332a26bd4a9ed91aa2476f4f5, type: 3}
   m_PrefabInstance: {fileID: 416850282981843933}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &806711467072873034
@@ -2882,6 +2899,11 @@ PrefabInstance:
 --- !u!4 &1052491218003174676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202330338738566371, guid: f52d572332a26bd4a9ed91aa2476f4f5, type: 3}
+  m_PrefabInstance: {fileID: 5091689703689933303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1680098010545622410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5906955743522348157, guid: f52d572332a26bd4a9ed91aa2476f4f5, type: 3}
   m_PrefabInstance: {fileID: 5091689703689933303}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8867078558869306861
