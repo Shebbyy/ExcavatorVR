@@ -6,6 +6,8 @@ namespace MachineProject.CustomScripts.VehicleControls
 {
     public class MachineExcavatorControls : MachineTrackBasedControls
     {
+        public GameObject leftJoystick;
+        public GameObject rightJoystick;
         // Start is called before the first frame update
         void Start()
         {
