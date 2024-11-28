@@ -279,6 +279,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: DriveControlRight
       objectReference: {fileID: 0}
+    - target: {fileID: 764918630587584407, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: attachEaseIn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 764918630587584407, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: snapAttachEaseInTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 764918630587584407, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: snapAttachEaseInCompleted
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 764918630587584407, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: useHandObjectAttachmentPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1669662438034392030, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
       propertyPath: m_Convex
       value: 1
@@ -355,9 +371,25 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 3.5024633
       objectReference: {fileID: 0}
+    - target: {fileID: 4430518421723084568, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: attachEaseIn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430518421723084568, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: snapAttachEaseInTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430518421723084568, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: snapAttachEaseInCompleted
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5258711207012859317, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
       propertyPath: m_Size.x
       value: 2.995071
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316944966845277523, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      propertyPath: velocity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5316944966845277523, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
       propertyPath: leverDeadZone
