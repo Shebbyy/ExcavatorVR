@@ -13,6 +13,8 @@ namespace MachineProject.CustomScripts.VehicleControls
     protected Interactable interactable;
     protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.DetachFromOtherHand;
     private bool isAttached = false;
+    public Hand leftHand;
+    public Hand rightHand;
 
     public float minLimit = -30f;
     public float maxLimit = 30f;
@@ -35,21 +37,14 @@ namespace MachineProject.CustomScripts.VehicleControls
             beforeGrabRotation = hand.transform.rotation.eulerAngles;
         }
         
-        if (hand.grabGripAction.state)
-        {
-            isAttached = true;
+        if (SteamVR_Input.GetState("GrabGrip", hand.handType)) {
             Vector3 currentGrabRotation = hand.transform.rotation.eulerAngles;
 
             transform.SetLocalPositionAndRotation(transform.localPosition,
                 Quaternion.Euler(Mathf.Clamp(currentGrabRotation.x - beforeGrabRotation.x, minLimit, maxLimit),
                     Mathf.Clamp(currentGrabRotation.y - beforeGrabRotation.y, minLimit, maxLimit),
-                    Mathf.Clamp(currentGrabRotation.z - beforeGrabRotation.z, minLimit, maxLimit)));
-            
-            hand.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        }
-        else
-        {
-            isAttached = false;
+                    transform.localEulerAngles.z));
+            //hand.transform.SetPositionAndRotation(transform.position, transform.rotation);
         }
     }
 
@@ -67,10 +62,12 @@ namespace MachineProject.CustomScripts.VehicleControls
     // Update is called once per frame
     void Update()
     {
-        if (!isAttached
+        if (   !SteamVR_Input.GetState("GrabGrip", leftHand.handType)
+            && !SteamVR_Input.GetState("GrabGrip", rightHand.handType)
             && (MathF.Abs(transform.localEulerAngles.x) >= 0.02
                 || MathF.Abs(transform.localEulerAngles.y) >= 0.02))
         {
+            Debug.Log("Stopping!");
             transform.SetLocalPositionAndRotation(transform.localPosition,
                 Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0f, 0f, 0f), 5f * Time.deltaTime));
         }

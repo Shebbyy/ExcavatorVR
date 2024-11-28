@@ -1,7 +1,7 @@
 # ExcavatorVR
 ## Todos
-- [ ] Machine Controls with VR Controller
-- [ ] Port Controls to interactive Joysticks in the machine interior
+- [x] Machine Controls with VR Controller
+- [x] Port Controls to interactive Joysticks in the machine interior
 - [ ] Add Terrain Deformation based on shovel interaction with floor
 
 - [ ] Add Dumper Vehicle 

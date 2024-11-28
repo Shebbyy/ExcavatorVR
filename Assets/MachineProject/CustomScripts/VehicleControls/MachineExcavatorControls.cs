@@ -43,11 +43,11 @@ namespace MachineProject.CustomScripts.VehicleControls
 
         private void HandleJoystickMovement()
         {
-            // InnerArm
+            //// InnerArm
             HandleArmMovement(arm1, rightJoystick.transform.localEulerAngles.x, rightJoystickMaxLimit, arm1MaxRotation, arm1MinRotation);
             
             // OuterArm
-            HandleArmMovement(arm2, leftJoystick.transform.localEulerAngles.x, leftJoystickMaxLimit, arm2MaxRotation, arm2MinRotation);
+            HandleArmMovement(arm2, leftJoystick.transform.localEulerAngles.x, leftJoystickMaxLimit, arm2MaxRotation, arm2MinRotation, true);
             
             // Bucket
             HandleArmMovement(bucket, rightJoystick.transform.localEulerAngles.y, rightJoystickMaxLimit, bucketMaxRotation, bucketMinRotation, true);
@@ -55,38 +55,64 @@ namespace MachineProject.CustomScripts.VehicleControls
             // Body
             float bodyVelocity = GetJoystickRotationChange(leftJoystick.transform.localEulerAngles.y, leftJoystickMaxLimit);
 
-            float add = 50f;
+            float add = 40f;
             if (bodyVelocity < 0)
             {
-                add *= -1;
+                add *= -1f;
             }
-            
+
             upperBody.transform.SetLocalPositionAndRotation(upperBody.transform.localPosition,
-                Quaternion.Lerp(upperBody.transform.localRotation, Quaternion.Euler(upperBody.transform.localEulerAngles.x, upperBody.transform.localEulerAngles.y + add, upperBody.transform.localEulerAngles.z), Mathf.Abs(bodyVelocity) / 5 * Time.deltaTime));
+                Quaternion.Lerp(upperBody.transform.localRotation, Quaternion.Euler(upperBody.transform.localEulerAngles.x, upperBody.transform.localEulerAngles.y + add, upperBody.transform.localEulerAngles.z), Mathf.Abs(bodyVelocity) / 2 * Time.deltaTime));
+
+
+            if (leftJoystick.transform.localEulerAngles.y < leverDeadZone)  {
+                upperBody.transform.localEulerAngles = upperBody.transform.localEulerAngles;
+            }
         }
 
         private void HandleArmMovement(GameObject arm, float joystickAngle, float joystickMaxLimit, float armMaxRotation,
             float armMinRotation, bool invertMovement = false)
         {
             float armVelocity = GetJoystickRotationChange(joystickAngle, joystickMaxLimit);
+            
+
+            float add = 40f;
+            if (armVelocity < 0)
+            {
+                add *= -1f;
+            }
 
             if (invertMovement)
             {
-                armVelocity *= -1;
+                add *= -1;
+            }
+
+            float armAngle = arm.transform.localEulerAngles.x;
+            if (armAngle > 180)  {
+                armAngle = armAngle - 360;
             }
             
             arm.transform.SetLocalPositionAndRotation(arm.transform.localPosition,
-                Quaternion.Lerp(arm.transform.localRotation, Quaternion.Euler(armVelocity >= 0 ? armMaxRotation : armMinRotation, 0f, 0f), Mathf.Abs(armVelocity) / 5 * Time.deltaTime));
+                Quaternion.Lerp(arm.transform.localRotation, Quaternion.Euler(Mathf.Clamp(armAngle + add, armMinRotation, armMaxRotation), 0f, 0f), Mathf.Abs(armVelocity) * Time.deltaTime));
         }
 
         float GetJoystickRotationChange(float angle, float maxAngle)
         {
+            
+
+            float calcAngle = angle;
+            if (angle > 180)
+            {
+                calcAngle -= 360;
+            }
+            
+            Debug.Log(angle);
             if (Mathf.Abs(angle) < leverDeadZone) {
                 return 0;
             }
             
             // Speed in Abhängigkeit zum MaxAngle mit Absolutwert von Angle berechnen, falls negativ dann invertieren
-            return (Mathf.Abs(angle) / maxAngle) * velocity * (angle <= 180 ? 1 : -1);
+            return (Mathf.Abs(calcAngle) / maxAngle) * velocity * (angle <= 180 ? 1 : -1);
         }
     }
 }
