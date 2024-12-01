@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\SceneSwap.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\LevelReset.cs" />
      <Compile Include="Assets\_VRtwix\Scripts\Interactables\Button.cs" />
+     <Compile Include="Assets\MachineProject\CustomScripts\CustomTerrainTerraform.cs" />
      <Compile Include="Assets\Scripts\CreateBoxPile.cs" />
      <Compile Include="Assets\MachineProject\CustomScripts\VehicleControls\Joystick.cs" />
      <Compile Include="Assets\MachineProject\ExternalAssets\Loading Games\Toon City Pack\Demo\Scripts\StreetLight.cs" />

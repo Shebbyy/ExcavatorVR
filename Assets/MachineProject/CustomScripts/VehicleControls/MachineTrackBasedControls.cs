@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
@@ -73,7 +71,7 @@ namespace MachineProject.CustomScripts.VehicleControls
                 }
 
                 //---calc theta (degrees to rotate)
-                float t = (f / (r + treadDistance));//add treadDistance (and use f) to avoind divistion by 0
+                float t = (f / (r + treadDistance));//add treadDistance (and use f) to avoid div by 0
 
                 //--calculate travel distance
                 float distance = ((r + treadDistance / 2) * Mathf.Sin (t / 2) * 2);//distance to move at angle

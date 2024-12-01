@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
@@ -11,7 +8,6 @@ namespace MachineProject.CustomScripts.VehicleControls
     public class Joystick : MonoBehaviour
 {
     protected Interactable interactable;
-    protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.DetachFromOtherHand;
     private bool isAttached = false;
     public Hand leftHand;
     public Hand rightHand;
@@ -27,7 +23,7 @@ namespace MachineProject.CustomScripts.VehicleControls
         interactable = GetComponent<Interactable>();
     }
 
-    // SteamVR Event, wenn vom Hover zum grabben übergegangen wird
+    // SteamVR Event, for switching from hover to grab / handle the grab behavior
     protected virtual void HandHoverUpdate(Hand hand)
     {
         GrabTypes startingGrabType = hand.GetGrabStarting();
@@ -44,20 +40,8 @@ namespace MachineProject.CustomScripts.VehicleControls
                 Quaternion.Euler(Mathf.Clamp(currentGrabRotation.x - beforeGrabRotation.x, minLimit, maxLimit),
                     Mathf.Clamp(currentGrabRotation.y - beforeGrabRotation.y, minLimit, maxLimit),
                     transform.localEulerAngles.z));
-            //hand.transform.SetPositionAndRotation(transform.position, transform.rotation);
         }
     }
-
-    // SteamVR Event, wenn das Objekt losgelassen wird
-    /**protected virtual void HandAttachedUpdate(Hand hand)
-    {
-        if (hand.IsGrabEnding(this.gameObject))
-        {
-            Debug.Log("Removed Attachment");
-            //hand.DetachObject(gameObject);
-            isAttached = false;
-        }
-    }**/
 
     // Update is called once per frame
     void Update()

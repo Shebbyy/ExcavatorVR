@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MachineProject.CustomScripts.VehicleControls
@@ -111,7 +109,7 @@ namespace MachineProject.CustomScripts.VehicleControls
                 return 0;
             }
             
-            // Speed in Abhängigkeit zum MaxAngle mit Absolutwert von Angle berechnen, falls negativ dann invertieren
+            // Speed calculated with maxAngle as maxspeed and converted into negative in case the joystick points back
             return (Mathf.Abs(calcAngle) / maxAngle) * velocity * (angle <= 180 ? 1 : -1);
         }
     }
