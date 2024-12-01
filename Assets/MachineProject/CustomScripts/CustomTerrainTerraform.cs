@@ -3,28 +3,44 @@ using UnityEngine;
 namespace MachineProject.CustomScripts.VehicleControls
 {
     // This Class was created based on the blog post here: https://discussions.unity.com/t/paint-terrain-texture-on-runtime/236566/2 All props go to @qtoompuu for implementing the terrain transformation and explaining it in a usable manor, some minor changes were made 
-    // to accomodate for this Demos usecase, so it works with colliders instead of raycasts and input buttons
+    // to accomodate for this Demos usecase, so it works with colliders instead of raycasts and input buttons;
+    // The Major changes are mostly in the Update Function, some smaller changes in Awake and some unneeded methods were removed
     public class CustomTerrainTerraform : MonoBehaviour
     {
-        //place these where you would normally declare variables
-        Terrain targetTerrain; //The terrain obj you want to edit
-        int terrainHeightMapWidth; //Used to calculate click position
-        int terrainHeightMapHeight;
-        float[,] heights; //a variable to store the new heights
-        TerrainData targetTerrainData; // stores the terrains terrain data
         public enum EffectType
         {
             raise,
             lower
         };
-
-        public Texture2D[] brushIMG; // This will allow you to switch brushes
-        float[,] brush; // this stores the brush.png pixel data
-        public int brushSelection; // current selected brush
         public int areaOfEffectSize = 100; // size of the brush
-        [Range(0.01f,1f)] // you can remove this if you want
         public float strength; // brush strength
-        float[,,] splat; // A splat map is what unity uses to overlay all of your paints on to the terrain
+        
+        private Terrain targetTerrain; //The terrain obj you want to edit
+        private int terrainHeightMapWidth; //Used to calculate click position
+        private int terrainHeightMapHeight;
+        private float[,] heights; //a variable to store the new heights
+        private TerrainData targetTerrainData; // stores the terrains terrain data
+        private float[,] brush; // this stores the brush.png pixel data
+        private BoxCollider shovelCollider;
+        private float[,,] splat; // A splat map is what unity uses to overlay all of your paints on to the terrain
+        
+        public float[,] GenerateBrush(int size)
+        {
+            float[,] heightMap = new float[size,size];//creates a 2d array which will store our brush
+            Texture2D scaledBrush = ResizeBrush(size,size); // this calls a function which we will write next, and resizes the brush image
+            //This will iterate over the entire re-scaled image and convert the pixel color into a value between 0 and 1
+            for (int x = 0; x < size; x++)
+            {
+                for(int y = 0; y < size; y++)
+                {
+                    Debug.Log("x, y: " + x + ";" + y);
+                    Color pixelValue = scaledBrush.GetPixel(x, y);
+                    heightMap[x, y] = pixelValue.grayscale / 255;
+                }
+            }
+    
+            return heightMap;
+        }
         
         public Terrain GetTerrainAtObject(GameObject gameObject)
         {
@@ -37,53 +53,15 @@ namespace MachineProject.CustomScripts.VehicleControls
             return default(Terrain);
         }
         
-        public float[,] GenerateBrush(Texture2D texture, int size)
-        {
-            float[,] heightMap = new float[size,size];//creates a 2d array which will store our brush
-            Texture2D scaledBrush = ResizeBrush(texture,size,size); // this calls a function which we will write next, and resizes the brush image
-            //This will iterate over the entire re-scaled image and convert the pixel color into a value between 0 and 1
-            for (int x = 0; x < size; x++)
-            {
-                for(int y = 0; y < size; y++)
-                {
-                    Color pixelValue = scaledBrush.GetPixel(x, y);
-                    heightMap[x, y] = pixelValue.grayscale / 255;
-                }
-            }
-    
-            return heightMap;
-        }
-        
-        public static Texture2D ResizeBrush(Texture2D src, int width, int height, FilterMode mode = FilterMode.Trilinear)
+        public static Texture2D ResizeBrush(int width, int height, FilterMode mode = FilterMode.Trilinear)
         {
             Rect texR = new Rect(0, 0, width, height);
-            _gpu_scale(src, width, height, mode);
 
             //Get rendered data back to a new texture
             Texture2D result = new Texture2D(width, height, TextureFormat.ARGB32, true);
             result.Reinitialize(width, height);
             result.ReadPixels(texR, 0, 0, true);
             return result;
-        }
-        
-        static void _gpu_scale(Texture2D src, int width, int height, FilterMode fmode)
-        {
-            //We need the source texture in VRAM because we render with it
-            src.filterMode = fmode;
-            src.Apply(true);
-
-            //Using RTT for best quality and performance. Thanks, Unity 5
-            RenderTexture rtt = new RenderTexture(width, height, 32);
-
-            //Set the RTT in order to render to it
-            Graphics.SetRenderTarget(rtt);
-
-            //Setup 2D matrix in range 0..1, so nobody needs to care about sized
-            GL.LoadPixelMatrix(0, 1, 1, 0);
-
-            //Then clear & draw the texture to fill the entire RTT.
-            GL.Clear(true, true, new Color(0, 0, 0, 0));
-            Graphics.DrawTexture(new Rect(0, 0, 1, 1), src);
         }
         
         public TerrainData GetCurrentTerrainData()
@@ -98,8 +76,9 @@ namespace MachineProject.CustomScripts.VehicleControls
         
         public void SetEditValues(Terrain terrain)
         {
-            targetTerrainData = GetCurrentTerrainData();
-            terrainHeightMapWidth = GetCurrentTerrainWidth();
+            targetTerrainData      = GetCurrentTerrainData();
+            heights                = GetCurrentTerrainHeightMap();
+            terrainHeightMapWidth  = GetCurrentTerrainWidth();
             terrainHeightMapHeight = GetCurrentTerrainHeight();
         }
         
@@ -193,6 +172,7 @@ namespace MachineProject.CustomScripts.VehicleControls
                 {
                     for (int yy = 0; yy < areaOfEffectSize + AOExMod - AOExMod1; yy++)
                     {
+                        
                         heights[xx, yy] +=
                             brush[xx - AOEzMod, yy - AOExMod] *
                             strength; //for each point we raise the value  by the value of brush at the coords * the strength modifier
@@ -212,36 +192,60 @@ namespace MachineProject.CustomScripts.VehicleControls
                         heights[xx, yy] -= brush[xx - AOEzMod, yy - AOExMod] * strength;
                     }
                 }
-
+                
+                Debug.Log("x:" + x + "; z:" + z);
+                Debug.Log("xMod:" + AOExMod + "; zMod:" + AOEzMod);
+                Debug.Log("xBase:" + (x - AOExMod) + "; yBase:" + (z - AOEzMod));
                 targetTerrainData.SetHeights(x - AOExMod, z - AOEzMod, heights);
             }
+        }
+        
+        public float[,] GetCurrentTerrainHeightMap()
+        {
+            if (targetTerrain)
+            {
+                // the first 2 0's indicate the coords where we start, the next values indicate how far we extend the area, so what we are saying here is I want the heights starting at the Origin and extending the entire width and height of the terrain
+                return targetTerrain.terrainData.GetHeights(0, 0, 
+                    targetTerrain.terrainData.heightmapResolution, 
+                    targetTerrain.terrainData.heightmapResolution);
+            }
+
+            return default(float[,]);
         }
 
         void Awake()
         {
-            brush = GenerateBrush(brushIMG[brushSelection], areaOfEffectSize); // This will take the brush image from our array and will resize it to the area of effect
+            brush = GenerateBrush(areaOfEffectSize); // This will take the brush image from our array and will resize it to the area of effect
             targetTerrain = FindObjectOfType<Terrain>(); // this will find terrain in your scene, alternatively, if you know you will only have one terrain, you can make it a public variable and assign it that way
+            shovelCollider = GetComponent<BoxCollider>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    Transform cam = Camera.main.transform;
-            //    Ray ray = new Ray(cam.position, cam.forward);
-            //    RaycastHit hit;
-            //    if(Physics.Raycast (ray, hit, 500))
-            //    {
-            //        targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
-            //        SetEditValues(targetTerrain);
-//
-            //        GetTerrainCoordinates(hit, out int terX, out int terZ);
-            //        ModifyTerrain(terX, terZ, EffectType.raise);
-            //    }
-            //}
+            Transform shovelPos = shovelCollider.transform;
+            RaycastHit hit;
+            if(Physics.Raycast(shovelPos.position, -shovelPos.forward, out hit))
+            {
+                // Only Handle Terrain hits
+                if (   hit.collider.gameObject.name != "Terrain"
+                    || hit.distance > 5) {
+                    return;
+                }
+                //Debug.Log("Hit Something: " + hit.collider.gameObject.name + ", Distance: " + hit.distance);
+                EffectType action = EffectType.lower;
+                if (hit.distance > 2f)
+                {
+                    action = EffectType.raise;
+                }
+                
+                targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
+                SetEditValues(targetTerrain);
+                
+                GetTerrainCoordinates(hit, out int terX, out int terZ);
+                ModifyTerrain(terX, terZ, action);
+            }
         }
-
     }
 }
 

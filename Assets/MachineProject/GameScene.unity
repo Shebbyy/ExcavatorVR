@@ -176,7 +176,7 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -219,6 +219,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &720196651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720196639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf3f3d8d61870f4497b3a5788fe653f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaOfEffectSize: 2
+  strength: 2
 --- !u!1 &869256254 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3473084097059252023, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
@@ -410,7 +424,8 @@ GameObject:
   - component: {fileID: 1536675207}
   - component: {fileID: 1536675206}
   - component: {fileID: 1536675205}
-  m_Layer: 0
+  - component: {fileID: 1536675208}
+  m_Layer: 4
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -491,6 +506,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.063, y: 0.018, z: -0.02}
+--- !u!64 &1536675208
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536675204}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1594821134 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2562159858898170238, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
@@ -740,7 +777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2897614016950758228, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3016383099568257254, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
       propertyPath: m_Constraints
@@ -1001,6 +1038,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3736623205553331755, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 720196645}
+    - targetCorrespondingSourceObject: {fileID: 3736623205553331755, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 720196651}
     - targetCorrespondingSourceObject: {fileID: 3473084097059252023, guid: 76558e25a33a06248bfa6669c5f6baa9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 869256259}
@@ -1029,7 +1069,7 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

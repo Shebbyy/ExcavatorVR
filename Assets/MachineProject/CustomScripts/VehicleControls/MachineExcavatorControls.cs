@@ -104,7 +104,6 @@ namespace MachineProject.CustomScripts.VehicleControls
                 calcAngle -= 360;
             }
             
-            Debug.Log(angle);
             if (Mathf.Abs(angle) < leverDeadZone) {
                 return 0;
             }
