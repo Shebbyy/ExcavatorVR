@@ -172,7 +172,7 @@ namespace MachineProject.CustomScripts.VehicleControls
             }
 
             _targetTerrainData.SetHeights(clampedBrushX, clampedBrushY, heights);
-            UpdateTerrainTexture(clampedBrushX, clampedBrushY,  2);
+            UpdateTerrainTexture(clampedBrushX, clampedBrushY, clampedBrushWidth, clampedBrushHeight, 2);
         }
 
         private void LowerTerrain(Vector3 brushWorldPosition)
@@ -195,21 +195,33 @@ namespace MachineProject.CustomScripts.VehicleControls
             }
 
             _targetTerrainData.SetHeights(clampedBrushX, clampedBrushY, heights);
-            UpdateTerrainTexture(clampedBrushX, clampedBrushY,  2);
+            UpdateTerrainTexture(clampedBrushX, clampedBrushY, clampedBrushWidth, clampedBrushHeight, 2);
         }
         
-        private void UpdateTerrainTexture(int posX, int posY, int textureIndex)
+        
+        private int updateTexLastX = -1;
+        private int updateTexLastY = -1;
+        private void UpdateTerrainTexture(int posX, int posY, int width, int height, int textureIndex)
         {
+            if (posX == updateTexLastX
+                && posY == updateTexLastY)
+            {
+                return;
+            }
+            else {
+                updateTexLastX = posX;
+                updateTexLastY = posY;
+            }
             // Get the number of textures on the terrain
             int texturesCount = _targetTerrainData.alphamapLayers;
   
             // Create a 3D array to hold the new alpha values for each texture on the terrain
-            float[,,] textureAlphas = new float[posY, posX, texturesCount];
+            float[,,] textureAlphas = _targetTerrainData.GetAlphamaps(posX, posY, width, height);
   
             // Loop through each pixel in the brush area and set the alpha value for the specified texture index to 1, and 0 for all others
-            for (var y = 0; y < posY; y++)
+            for (var y = 0; y < height; y++)
             {
-                for (var x = 0; x < posX; x++)
+                for (var x = 0; x < width; x++)
                 {
                     for (var i = 0; i < texturesCount; i++)
                     {
