@@ -3,9 +3,8 @@ using UnityEngine;
 
 namespace MachineProject.CustomScripts.VehicleControls
 {
-    // This Class was created based on the blog post here: https://discussions.unity.com/t/paint-terrain-texture-on-runtime/236566/2 All props go to @qtoompuu for implementing the terrain transformation and explaining it in a usable manor, some minor changes were made 
-    // to accomodate for this Demos usecase, so it works with colliders instead of raycasts and input buttons;
-    // The Major changes are mostly in the Update Function, some smaller changes in Awake and some unneeded methods were removed
+    // This Class was created based on the blog post here: https://discussions.unity.com/t/simple-runtime-terrain-editor/681462 All props go to @WinterboltGames for the amazing TerrainTool which was used to implement this excavator focussed Ground Deformation Script 
+    // The Major changes are mostly in the Update Function; some unneeded methods were removed
     public class CustomTerrainTerraform : MonoBehaviour
     {
         /// <summary>
@@ -45,16 +44,13 @@ namespace MachineProject.CustomScripts.VehicleControls
             Lower
         }
 
-        private BoxCollider shovelCollider;
-
         private void Start()
         {
-            shovelCollider = GetComponent<BoxCollider>();
         }
 
         private void Update()
         {
-            Transform shovelPos = shovelCollider.transform;
+            Transform shovelPos = this.transform;
             if (Physics.Raycast(shovelPos.position, -shovelPos.forward, out RaycastHit hitInfo))
             {
                 // Only Handle Terrain hits
@@ -63,10 +59,11 @@ namespace MachineProject.CustomScripts.VehicleControls
                 {
                     return;
                 }
+                Debug.DrawRay(shovelPos.position, -shovelPos.forward, Color.green);
 
                 TerrainModificationAction action = TerrainModificationAction.Lower;
 
-                if (hitInfo.distance > 2)
+                if (hitInfo.distance > 0.5f)
                 {
                     if (shovelPos.rotation.eulerAngles.x < 290
                         && shovelPos.rotation.eulerAngles.x > 260)
@@ -175,6 +172,7 @@ namespace MachineProject.CustomScripts.VehicleControls
             }
 
             _targetTerrainData.SetHeights(clampedBrushX, clampedBrushY, heights);
+            UpdateTerrainTexture(clampedBrushX, clampedBrushY,  2);
         }
 
         private void LowerTerrain(Vector3 brushWorldPosition)
@@ -197,6 +195,35 @@ namespace MachineProject.CustomScripts.VehicleControls
             }
 
             _targetTerrainData.SetHeights(clampedBrushX, clampedBrushY, heights);
+            UpdateTerrainTexture(clampedBrushX, clampedBrushY,  2);
+        }
+        
+        private void UpdateTerrainTexture(int posX, int posY, int textureIndex)
+        {
+            // Get the number of textures on the terrain
+            int texturesCount = _targetTerrainData.alphamapLayers;
+  
+            // Create a 3D array to hold the new alpha values for each texture on the terrain
+            float[,,] textureAlphas = new float[posY, posX, texturesCount];
+  
+            // Loop through each pixel in the brush area and set the alpha value for the specified texture index to 1, and 0 for all others
+            for (var y = 0; y < posY; y++)
+            {
+                for (var x = 0; x < posX; x++)
+                {
+                    for (var i = 0; i < texturesCount; i++)
+                    {
+                        Debug.Log("CurrentTexture: " + i);
+                        Debug.Log("CurrentTexture: " + textureIndex);
+                        // If the current texture index matches the specified texture index, set its alpha value to 1
+                        // Otherwise, set its alpha value to 0
+                        textureAlphas[y, x, i] = (i == textureIndex) ? 1.0f : 0.0f;
+                    }
+                }
+            }
+  
+            // Set the alpha map at the specified position to the updated texture alphas
+            _targetTerrainData.SetAlphamaps(posX, posY, textureAlphas);
         }
     }
 }
