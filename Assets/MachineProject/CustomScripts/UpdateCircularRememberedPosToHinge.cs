@@ -6,7 +6,7 @@ namespace MachineProject.CustomScripts
 {
     public class UpdateCircularRememberedPosToHinge : MonoBehaviour
     {
-        
+
         protected Interactable interactable;
         protected CircularDrive circularDrive;
         protected Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.DetachFromOtherHand;
@@ -19,7 +19,8 @@ namespace MachineProject.CustomScripts
             circularDrive = GetComponent<CircularDrive>();
         }
         
-        // SteamVR Event, wenn vom Hover zum grabben übergegangen wird
+        // SteamVR Event, to bind the hand to the lever after a grab interaction is started, it should also set the circular-drive out-Angle to 0,
+        // so after grabbing the lever again it does not jump to the rotation it was at when it was let go
         protected virtual void HandHoverUpdate( Hand hand )
         {
             GrabTypes startingGrabType = hand.GetGrabStarting();
@@ -35,9 +36,10 @@ namespace MachineProject.CustomScripts
             }
         }
         
-        // SteamVR Event, wenn das Objekt losgelassen wird
+        // SteamVR Event, after Event is let go
         protected virtual void HandAttachedUpdate(Hand hand)
         {
+            // If Grab is let go, then detach hand so it adjusts back to the controller position
             if (hand.IsGrabEnding(this.gameObject))
             {
                 hand.DetachObject(gameObject);
@@ -48,6 +50,8 @@ namespace MachineProject.CustomScripts
         // Update is called once per frame
         void Update()
         {
+            // If its not attached, do a spring-like behavior and slowly put the rotation back to 0/0/0 over time;
+            // Theoretically available in the Hinge, but due to IsKinetic = true of the Rigidbody, the Spring does not behave as it should
             if (   !isAttached
                 && MathF.Abs(transform.localEulerAngles.x) >= 0.02 ) {
                 transform.SetLocalPositionAndRotation(transform.localPosition, Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0f, 0f, 0f), 1.0f * Time.deltaTime));

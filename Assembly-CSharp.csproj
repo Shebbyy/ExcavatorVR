@@ -78,7 +78,6 @@
      <Compile Include="Assets\MachineProject\CustomScripts\VehicleControls\MachineTrackBasedControls.cs" />
      <Compile Include="Assets\MachineProject\ExternalAssets\Loading Games\Toon City Pack\Demo\Scripts\TrafficLights.cs" />
      <Compile Include="Assets\MachineProject\CustomScripts\UpdateCircularRememberedPosToHinge.cs" />
-     <Compile Include="Assets\MachineProject\CustomScripts\VehicleControls\MachineVehicleControls.cs" />
      <Compile Include="Assets\_VRtwix\Scripts\Interactables\Toggle.cs" />
      <Compile Include="Assets\MachineProject\ExternalAssets\Loading Games\Toon City Pack\Demo\Scripts\PoliceSiren.cs" />
      <Compile Include="Assets\_VRtwix\Scripts\Interactables\Tuner.cs" />
