@@ -127,7 +127,9 @@ Therefore, in this context, the decision was made to create a small training sim
 
 \section{User Guide}
 
-This Project is designed to be played in a seated manner. The User is not supposed to change their position during the duration of the playsession. The Chair should be placed in the middle of the playspace and should face to the front of the configured playspace of the HMDs software.
+This Project is designed to be played in a seated manner. The user is not supposed to change their position during the duration of the playsession. The Chair should be placed in the middle of the playspace and should face to the front of the configured playspace of the HMDs software.
+
+The user requires a HMD of their choice, but preferrably a Oculus Rift-S and one controller for each hand, which is compatible with their HMD.
 
 \begin{figure}[tb]% specify a combination of t, b, p, or h for top, bottom, on its own page, or here
   \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact)
@@ -196,245 +198,86 @@ Therefore it was important to make the shovel interact with the surrounding terr
 
 
 \section{Implementation}
+For this project there are both generic scripts and vehicle-control scripts. Whilst the generic scripts can be partially reused in other usecases the contents of the vehicle-controls are exclusively usable for vehicle controls.
+
+The Logic for moviing the track of the excavator was abstracted into its own class, so in case, the program is to be expanded in the future with further track-based vehicles, the class could be used as a basis.
 
 
+\subsection{Track Lever Spring behavior}
+This script is used for the track-levers. In reality, after letting go of the lever, it slowly moves back to its initial position. After some initial attempts to accomplish this behavior using the spring-feature of the Unity-Default Hinge-Joints, it was discovered, that due to the levers being kinetic rigidbodies, the spring behavior would not work properly. Due to that the behavior had to be implemented by hand. This Script also allows for the hand to snap to the lever upon grabbing it and lets go of it, if the grab-interaction ends.
 
-\subsection{}
-
-The style automatically looks for image files with the correct extension (eps for regular \LaTeX; pdf, png, and jpg for pdf\LaTeX), in a set of given subfolders defined above using \verb|\graphicspath|: figures/, pictures/, images/.
-It is thus sufficient to use \verb|\includegraphics{CypressView}| (instead of \verb|\includegraphics{pictures/CypressView.jpg}|).
-Figures should be in CMYK or Grey scale format, otherwise, colour shifting may occur during the printing process.
-
-\subsection{Vector figures}
-
-Vector graphics like svg, eps, pdf are best for charts and other figures with text or lines.
-They will look much nicer and crisper and any text in them will be more selectable, searchable, and accessible.
-
-\subsection{Raster figures}
-
-Of the raster graphics formats, screenshots of user interfaces and text, as well as line art, are better shown with png.
-jpg is better for photographs.
-Make sure all raster graphics are captured in high enough resolution so they look crisp and scale well.
-
-\subsection{Alt texts}
-
-Add alternative texts that describe the content of the image to all figures.
-
-\subsection{Figures on the first page}
-
-The teaser figure should only have the width of the abstract as the template enforces it.
-The use of figures other than the optional teaser is not permitted on the first page.
-Other figures should begin on the second page.
-Papers submitted with figures other than the optional teaser on the first page will be refused.
-
-\subsection{Subfigures}
-
-\subsection{Figure Credits}
-\label{sec:figure_credits_inst}
-
-In the \hyperref[sec:figure_credits]{Figure Credits} section at the end of the paper, you should credit the original sources of any figures that were reproduced or modified.
-Include any license details necessary, as well as links to the original materials whenever possible.
-For credits to figures from academic papers, include a citation that is listed in the \textbf{References} section.
-An example is provided \hyperref[sec:figure_credits]{below}.
+To smooth out the spring-functionality, the rotation of the lever is changed with linear interpolation.
 
 
-\section{Equations and Tables}
+\subsection{Terrain Manipulation}
 
-Equations can be added like so:
+The logic was built with the idea of it being placed on a game object placed right at the blade of the excavator bucket.
 
-\begin{equation}
-  \label{eq:sum}
-  \sum_{j=1}^{z} j = \frac{z(z+1)}{2}
-\end{equation}
-
-Tables, such as \cref{tab:vis_papers} can also be included.
-
-
-\begin{table}[tb]
-  \caption{%
-  	VIS/VisWeek accepted/presented papers: 1990--2016.%
-  }
-  \label{tab:vis_papers}
-  \scriptsize%
-  \centering%
-  \begin{tabu}{%
-  	  r%
-  	  	*{7}{c}%
-  	  	*{2}{r}%
-  	}
-  	\toprule
-  	year & \rotatebox{90}{Vis/SciVis} &   \rotatebox{90}{SciVis conf} &   \rotatebox{90}{InfoVis} &   \rotatebox{90}{VAST} &   \rotatebox{90}{VAST conf} &   \rotatebox{90}{TVCG @ VIS} &   \rotatebox{90}{CG\&A @ VIS} &   \rotatebox{90}{VIS/VisWeek} \rotatebox{90}{incl.\ TVCG/CG\&A}   &   \rotatebox{90}{VIS/VisWeek} \rotatebox{90}{w/o TVCG/CG\&A}   \\
-  	\midrule
-  	2016 & 30 &   & 37 & 33 & 15 & 23 & 10 & 148 & 115 \\
-  	2015 & 33 & 9 & 38 & 33 & 14 & 17 & 15 & 159 & 127 \\
-  	2014 & 34 &   & 45 & 33 & 21 & 20 &    & 153 & 133 \\
-  	2013 & 31 &   & 38 & 32 &    & 20 &    & 121 & 101 \\
-  	2012 & 42 &   & 44 & 30 &    & 23 &    & 139 & 116 \\
-  	2011 & 49 &   & 44 & 26 &    & 20 &    & 139 & 119 \\
-  	2010 & 48 &   & 35 & 26 &    &    &    & 109 & 109 \\
-  	2009 & 54 &   & 37 & 26 &    &    &    & 117 & 117 \\
-  	2008 & 50 &   & 28 & 21 &    &    &    &  99 &  99 \\
-  	2007 & 56 &   & 27 & 24 &    &    &    & 107 & 107 \\
-  	2006 & 63 &   & 24 & 26 &    &    &    & 113 & 113 \\
-  	2005 & 88 &   & 31 &    &    &    &    & 119 & 119 \\
-  	2004 & 70 &   & 27 &    &    &    &    &  97 &  97 \\
-  	2003 & 74 &   & 29 &    &    &    &    & 103 & 103 \\
-  	2002 & 78 &   & 23 &    &    &    &    & 101 & 101 \\
-  	2001 & 74 &   & 22 &    &    &    &    &  96 &  96 \\
-  	2000 & 73 &   & 20 &    &    &    &    &  93 &  93 \\
-  	1999 & 69 &   & 19 &    &    &    &    &  88 &  88 \\
-  	1998 & 72 &   & 18 &    &    &    &    &  90 &  90 \\
-  	1997 & 72 &   & 16 &    &    &    &    &  88 &  88 \\
-  	1996 & 65 &   & 12 &    &    &    &    &  77 &  77 \\
-  	1995 & 56 &   & 18 &    &    &    &    &  74 &  74 \\
-  	1994 & 53 &   &    &    &    &    &    &  53 &  53 \\
-  	1993 & 55 &   &    &    &    &    &    &  55 &  55 \\
-  	1992 & 53 &   &    &    &    &    &    &  53 &  53 \\
-  	1991 & 50 &   &    &    &    &    &    &  50 &  50 \\
-  	1990 & 53 &   &    &    &    &    &    &  53 &  53 \\
-  	\midrule               
-  	\textbf{sum} & \textbf{1545} & \textbf{9} & \textbf{632} & \textbf{310} & \textbf{50} & \textbf{123} & \textbf{25} & \textbf{2694} & \textbf{2546} \\
-  	\bottomrule
-  \end{tabu}%
-\end{table}
-
-\section{Supplemental Material Instructions}
-\label{sec:supplement_inst}
-
-In support of transparent research practices and long-term open science goals, you are encouraged to make your supplemental materials available on a publicly-accessible repository.
-Please describe the available supplemental materials in the \hyperref[sec:supplemental_materials]{Supplemental Materials} section.
-These details could include (1) what materials are available, (2) where they are hosted, and (3) any necessary omissions.
-
-
-\section{References}
-\label{sec:references_inst}
-
-An example of the reference formatting is provided in the \textbf{References} section at the end.
-
-
-\subsection{Include DOIs}
-
-All references which have a DOI should have it included in the bib\TeX\ for the style to display.
-The DOI can be entered with or without the \url{https://doi.org/} prefix.
-
-\subsection{Narrow DOI option}
-
-The \verb|-narrow| versions of the bibliography style use the font \verb|PTSansNarrow-TLF| for typesetting the DOIs in a compact way.
-This font needs to be available on your \LaTeX\ system.
-It is part of the \href{https://www.ctan.org/pkg/paratype}{\texttt{paratype} package}, and many distributions (such as MikTeX) have it automatically installed.
-If you do not have this package yet and want to use a \verb|-narrow| bibliography style then use your \LaTeX\ system's package installer to add it.
-If this is not possible you can also revert to the respective bibliography styles without the \verb|-narrow| in the file name.
-DVI-based processes to compile the template apparently cannot handle the different font so, by default, the template file uses the \texttt{abbrv-doi} bibliography style.
-
-\subsection{Disabling hyperlinks}
-
-To avoid adding hyperlinks to the references (the default) you can use \verb|\bibliographystyle{abbrv-doi}| instead of \verb|\bibliographystyle{abbrv-doi-hyperref}|.
-By default, the DOI field in a bib\TeX\ entry is turned into a hyperlink.
-
-See the examples in the bib\TeX\ file and the bibliography at the end of this template.
-
-\subsection{Guidelines for bibTeX}
+To determine, if the shovel is currently interacting with the terrain a raycast is sent out from the object the script is placed on. If the raycast hits the terrain and the hit was within a certain distance it checks the distance further. From here the behavior splits up in multiple paths:
 
 \begin{itemize}
-  \item All bibliographic entries should be sorted alphabetically by the last name of the first author.
-        This \LaTeX/bib\TeX\ template takes care of this sorting automatically.
-  \item Merge multiple references into one; e.\,g., use \cite{Max1995OpticalModelsDirect,Kitware2003VisualizationToolkitUsers} (not \cite{Kitware2003VisualizationToolkitUsers}\cite{Max1995OpticalModelsDirect}).
-        Within each set of multiple references, the references should be sorted in ascending order.
-        This \LaTeX/bib\TeX\ template takes care of both the merging and the sorting automatically.
-  \item Verify all data obtained from digital libraries, even ACM's DL and IEEE Xplore  etc.\ are sometimes wrong or incomplete.
-  \item Do not trust bibliographic data from other services such as Mendeley.com, Google Scholar, or similar; these are even more likely to be incorrect or incomplete.
-  \item Articles in journal---items to include:
-        \begin{itemize}
-  	      \item author names
-  	      \item title
-  	      \item journal name
-  	      \item year
-  	      \item volume
-  	      \item number
-  	      \item month of publication as variable name (i.e., \{jan\} for January, etc.; month ranges using \{jan \#\{/\}\# feb\} or \{jan \#\{-{}-\}\# feb\})
-          \item series. E.g., ``TVCG``, ``TVCG/VIS`` for special issue VIS papers, ``EuroVis``, ``CGF/EuroVis``.
-        \end{itemize}
-  \item Use journal names in proper style: correct: ``IEEE Transactions on Visualization and Computer Graphics'', incorrect: ``Visualization and Computer Graphics, IEEE Transactions on''
-  \item Papers in proceedings---items to include:
-        \begin{itemize}
-  	      \item author names
-  	      \item title
-  	      \item abbreviated proceedings name: e.g., ``Proc.\textbackslash{} CONF\_ACRONYNM'' without the year; example: ``Proc.\textbackslash{} CHI'', ``Proc.\textbackslash{} 3DUI'', ``Proc.\textbackslash{} Eurographics'', ``Proc.\textbackslash{} EuroVis''
-  	      \item year
-  	      \item series. E.g., ``VIS`` and ``EuroVis`` for short papers, ``CHI``...
-        \end{itemize}
-
-  \item Article/paper title convention: refrain from using curly brackets, except for acronyms/proper names/words following dashes/question marks etc.; example:\\\\
-        %
-        The paper ``Marching Cubes: A High Resolution 3D Surface Construction Algorithm'' should be entered as ``\{M\}arching \{C\}ubes: A High Resolution \{3D\} Surface Construction Algorithm'' or  ``\{M\}arching \{C\}ubes: A high resolution \{3D\} surface construction algorithm''.
-        It will then be typeset as ``Marching Cubes: A high resolution 3D surface construction algorithm''.
-  \item For all entries:
-        \begin{itemize}
-  	      \item DOI can be entered in the DOI field as plain DOI number or as DOI url.
-  	      \item ``pages`` or ``articleno``: Provide full page ranges AA-{}-BB, OR, if an article number is available like recent ACM conferences, use that instead. E.g., see the entry for Panavas et al.\ \cite{Panavas2022JuvenileGraphicalPerception}.
-        \end{itemize}
-  \item When citing references, do not use the reference as a sentence object; e.g., wrong: ``In \cite{Lorensen1987MarchingCubesHigh} the authors describe \dots'', correct: ``Lorensen and Cline \cite{Lorensen1987MarchingCubesHigh} describe \dots''
+  \item If the raycast distance was incredibly short, the script assumes the shovel is currently touching the terrain, therefore it starts lowering the terrain around the area the raycast hit.
+  \item The raycast had a lengthier distance, but the bucket is currently not opened into the direction of the ground, therefore any further behavior is stopped for this frame, since the bucket is not currently dumping any material
+  \item The raycast had a lengthier distance and the bucket is currently open. This suggests the excavator is currently dumping material. Therefore the terrain gets raised around the raycast-hit-position.
 \end{itemize}
 
-\section{Appendices}
-\label{sec:appendices_inst}
+To manipulate the terrain first of all the world position of the raycast-target needs to be translated into the local position of the terrain, after that is completed, the heightmap of the terrain around the calculated local position of the raycast-target gets adjusted, either raised or lowered by a fixed value. To keep the increase independant of the framerate the constant manipulation-strength gets multiplied by the deltaTime from the last frame to the current one.
 
-Appendices can be specified using \verb|\appendix|.
-For example, our Troubleshooting instructions in
-\iflabelexists{appendix:troubleshooting}
-  {\cref{appendix:troubleshooting}}
-  {the appendix of the full paper at \url{https://osf.io/nrmyc}}.
+Additionally to provide additional feedback for the user, the texture of manipulated terrain changes to a dirt-like texture, to make smaller terraforming-changes stick out a bit more.
 
-Note that the paper submission has to end after the \textbf{References} section and within the page limit of the conference you are submitting to.
-Any version of Appendices or the paper with Appendices included has to be submitted separately as supplementary material.
-You can use the \verb|hideappendix| class option to remove everything after \verb|\appendix|.
-We encourage you to submit a full version of your paper to a preprint server with any appendices included.
+\begin{figure}[h]% specify a combination of t, b, p, or h for top, bottom, on its own page, or here
+  \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact)
+  \includegraphics[width=0.45\textwidth, alt={A Top-Down View of the track-base of the excavator with a few circles and radius showing the different values required for calculating the skid steering rotation}]{TrackBase}
+  \caption{%
+  	A small sketch showing the different values required for the skid steering calculation visually%
+  }
+  \label{fig:skid_steering_sketch}
+\end{figure}
+\subsection{Track Movement}
 
-You can use the \verb|\iflabelexists| macro to cross reference an appendix from the main text, but only if that label (i.e.\ the appendix) actually exists.
-For example, above we use 
+For the Logic of the TrackMovement it requires two lever gameobjects whose rotation is then used to calculate the speed for the tracks each, which is then used to calculate the rotation and distance to move the vehicle.
 
-\begin{verbatim}
-\iflabelexists{appendix:troubleshooting}
-  {\cref{appendix:troubleshooting}}
-  {the appendix of the full paper at
-   \url{https://osf.io/XXXXX}}.
-\end{verbatim}
+These levers are then checked for their angle on every frame and the angle gets converted into a relative speed value with the ir max-angle being the maximum speed and an angle of 0 being a speed of 0.
 
-in order to cross-reference to the appendix with \verb|\cref| if it exists, but if the appendix is commented out then we will simply create a hyperlinked URL to it.
+In case both levers have a similar rotation a straight forward movement can be achieved, Otherwise the deviation from the course needs to be calculates. For that the radius of the inner track of the rotation needs to be calculated. This can be achieved by taking the width between both sides of the vehicle and dividing it by the relative speed of the fast to the slow track - 1. Afterwards the speed of the outer track needs to be divided through the calculated radius with the width between both sides of the vehicle added to it.
 
+From that rotation value we can also calculate the distance the vehicle is supposed to move forward to simulate the different rotation center-point, by multiplying it with the sinus-value
 
-\section{Filler Text to Flush Out the Paper}
+\subsection{Translating hand rotation to joystick rotation}
 
-\lipsum[1-2]% Just add some more arbitrary text so we see a fuller paper example
+For this logic a few requirements had to be considered whenever this behavior should be used:
 
+\begin{itemize}
+  \item The Hand Rotation should only be copied to the joystick if the user is actually grabbing the joystick
+  \item Only the currently gripped joystick should be affected and only by the rotation of the currently interacting hand.
+  \item If both hands grip two joysticks, the translation needs to work for both of them simultaneously
+\end{itemize}
 
-\section*{Supplemental Materials}
-\label{sec:supplemental_materials}
+Whenever the translation should be used the rotation of the current hand is grabbed and compared with the last update of the joysticks rotation, the difference of the rotation is then applied to the joystick. Once again, a similar functionality to the Track-Lever Spring Script is implemented here, with the only difference being, that this script considers both the x and y axis.
 
-Refer to the instructions for this section (\cref{sec:supplement_inst}).
-Below is an example you can follow that includes the actual supplemental material for this template:
+With this translation the z-axis  is deliberately kept consistent to keep the later translation in the excavator behavior simpler.
 
-All supplemental materials are available on OSF at \url{https://doi.org/10.17605/OSF.IO/2NBSG}, released under a CC BY 4.0 license.
-In particular, they include (1) Excel files containing the data for and analyses for creating \cref{tab:vis_papers} and \cref{fig:vis_papers}, (2) figure images in multiple formats, and (3) a full version of this paper with all appendices.
-Our other code is intellectual property of a corporation---Starbucks Research---and there is no feasible way to share it publicly.
+\subsection{Translating joystick rotation into excavator movements}
 
+For this translation each axis of both joysticks are handled seperately. The relative speed is calcucated by the angle of the joystick and it is then used to add or reduce the current rotation-value of the axis to be manipulated for each component of the excavator. In the case of the Stick-Boom or the Bucket, the velocity needs to be inverted, as a forward movement is seen as a positive rotation change, but the rotation should actually change into the negative.
 
-\section*{Figure Credits}
-\label{sec:figure_credits}
+To smooth out this movement to avoid any motion sickess during the excavator body swing or any snappy reactions of the excavator, the change of the rotation is once again applied with a linear interpolation to smooth out the movement.
 
-Refer to the instructions for this section (\cref{sec:figure_credits_inst}).
-Here are the actual figure credits for this template:
+\section{Future Improvements}
 
-\Cref{fig:teaser} image credit: Scott Miller / Special to the Vancouver Sun, January 22, 2009, page A6.
+As of now the projects serves as a nice proof of concept and a sort of tech demo. Therefore there are alot of features to be added or polished.
 
-\Cref{fig:vis_papers} is a partial recreation of Fig.\ 1 from \cite{Isenberg2017Vispubdata.orgMetadataCollection}, which is in the public domain.
+One of those features would be the correct placement of the hands when grabbing the track-levers. Currently they snap to the basis of the lever, sadly some experimentation with the attachmentOffset did not prove successful, but it would surely be a great improvement
 
+Currently there is also the missing logic of a bucket-fill state, currently you can remove and dump infinite material from the bucket, a limit on how much the bucket can remove before it needs to be dumped and a fillState for the bucket with visualization would surely improve the realism and make for a great improvement
+
+Other than that this project provides a great basis to implement further vehicles to drive, like a small dumper, a dozer or maybe even a crane.
 
 %% if specified like this the section will be omitted in review mode
-\acknowledgments{%
-	The authors wish to thank A, B, and C.
-  This work was supported in part by a grant from XYZ (\# 12345-67890).%
-}
+%\acknowledgments{%
+%	The authors wish to thank A, B, and C.
+  %This work was supported in part by a grant from XYZ (\# 12345-67890).%
+%}
 
 
 \bibliographystyle{abbrv-doi-hyperref}
@@ -444,25 +287,6 @@ Here are the actual figure credits for this template:
 
 \bibliography{template}
 
-
-\appendix % You can use the `hideappendix` class option to skip everything after \appendix
-
-\section{About Appendices}
-Refer to \cref{sec:appendices_inst} for instructions regarding appendices.
-
-\section{Troubleshooting}
-\label{appendix:troubleshooting}
-
-\subsection{ifpdf error}
-
-If you receive compilation errors along the lines of \texttt{Package ifpdf Error: Name clash, \textbackslash ifpdf is already defined} then please add a new line \verb|\let\ifpdf\relax| right after the \verb|\documentclass[journal]{vgtc}| call.
-Note that your error is due to packages you use that define \verb|\ifpdf| which is obsolete (the result is that \verb|\ifpdf| is defined twice); these packages should be changed to use \verb|ifpdf| package instead.
-
-
-\subsection{\texttt{pdfendlink} error}
-
-Occasionally (for some \LaTeX\ distributions) this hyper-linked bib\TeX\ style may lead to \textbf{compilation errors} (\texttt{pdfendlink ended up in different nesting level ...}) if a reference entry is broken across two pages (due to a bug in \verb|hyperref|).
-In this case, make sure you have the latest version of the \verb|hyperref| package (i.e.\ update your \LaTeX\ installation/packages) or, alternatively, revert back to \verb|\bibliographystyle{abbrv-doi}| (at the expense of removing hyperlinks from the bibliography) and try \verb|\bibliographystyle{abbrv-doi-hyperref}| again after some more editing.
 
 \end{document}
 

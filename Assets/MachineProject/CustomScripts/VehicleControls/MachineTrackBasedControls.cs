@@ -60,6 +60,7 @@ namespace MachineProject.CustomScripts.VehicleControls
 
         // The Track-Movement Function, this Function needs to calculate if the machine needs to be rotated in one direction
         // or if its allowed to go straight forward
+        // This algorithm is based on this StackOverflow post: https://stackoverflow.com/questions/125099/formula-for-controlling-the-movement-of-a-tank-like-vehicle
         void Move(float leftSpeed, float rightSpeed){
             int dir = 0;
             float s = 0;
