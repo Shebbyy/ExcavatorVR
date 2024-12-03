@@ -43,42 +43,38 @@
 %% of the \author command. ORCID IDs can be registered at https://orcid.org/.
 %% Include only the 16-digit dashed ID.
 \author{%
-  Sebastian Gradwohl
+  Sebastian Gradwohl*
 }
 
 \authorfooter{
   %% insert punctuation at end of each item
   \item
-  	Sebastian Gradwohl  is with the University of Applied Sciences Upper Austria - Hagenberg
+  	* Sebastian Gradwohl  is a Software Engineering Student of the University of Applied Sciences Upper Austria - Hagenberg
+
   	E-mail: s2310307057@fhooe.at
 }
 
 %% Abstract section.
 \abstract{%
-  \lipsum[1] % filler text. Replace with your abstract.
-  %
-  %% We recommend that you link to your supplemental material here in the abstract, as well
-  %% as in the Supplemental Materials section at the end.
-  A free copy of this paper and all supplemental materials are available at \url{https://OSF.IO/2NBSG}.
+  This paper focusses on the design and implementation of a fully simulated excavator-driving environment for the Oculus Rift-S. The Goal was to simulate the controls of a real excavator as accurate as possible.
 }
 
 %% Keywords that describe your work. Will show as 'Index Terms' in journal
 %% please capitalize first letter and insert punctuation after last keyword
-\keywords{Radiosity, global illumination, constant time}
+\keywords{Virtual Reality, Machine Controls}
 
-%% A teaser figure can be included as follows
+% A teaser figure can be included as follows
 \teaser{
   \centering
-  \includegraphics[width=\linewidth, alt={A view of a city with buildings peeking out of the clouds.}]{CypressView}
+  \includegraphics[width=\linewidth, alt={Outside View of the Excavator after digging out an area}]{ExcavatorOutsideView}
   \caption{%
-  	In the Clouds: Vancouver from Cypress Mountain.
-  	Note that the teaser may not be wider than the abstract block.%
+  	An outside view from the excavator after a quick playtest to dig out a smaller area%
   }
   \label{fig:teaser}
 }
 
 %% Uncomment below to disable the manuscript note
-%\renewcommand{\manuscriptnotetxt}{}
+\renewcommand{\manuscriptnotetxt}{}
 
 %% Copyright space is enabled by default as required by guidelines.
 %% It is disabled by the 'review' option or via the following command:
@@ -114,53 +110,96 @@
 
 %% The ``\maketitle'' command must be the first command after the
 %% ``\begin{document}'' command. It prepares and prints the title block.
-%% the only exception to this rule is the \firstsection command
+%% the only exception to this rule is the \firstsection command#
 \firstsection{Introduction}
 
 \maketitle
 
 
 %% \section{Introduction} %for journal use above \firstsection{..} instead
-This template is for papers of VGTC-sponsored conferences such as IEEE VIS, IEEE VR, and ISMAR which are published as special issues of TVCG.
-The template does not contain the respective dates of the conference/journal issue, these will be entered by IEEE as part of the publication production process.
-Therefore, \textbf{please leave the copyright statement at the bottom-left of this first page untouched}.
+Over the years there have been many attempts and demos to try and create training and demo simulators for different kinds of jobs. Virtual Reality provides an irreplacable opportunity to make the experience as realistic and easy to use as possible.
+Many different industries are already creating such software and distributing it, either for their customers or for their own employees. 
 
+Such software allows the users to train for the job in a safe space where the risk of accidents can be severely reduced whilst the economical and health dangers surrounding these are minimized.
 
-\section{Author Details}
+During the conception of this project, the severe lack of training software for the construction industry in particular really stuck out. 
+Therefore, in this context, the decision was made to create a small training simulator for excavator operators. Excavators have a comparatively high complexity for their controls and require a good intuition to use the machine effectively, which made this kind of vehicle the choice for this project.
 
-You should specify ORCID IDs for each author (see \url{https://orcid.org/}  to register) for disambiguation and long-term contact preservation.
-Use \verb|\authororcid{Author Name}{0000-0000-0000-0000}| for each author, replacing the ``Author Name'' and using the 16-digit (hyphenated) ORCID ID for the second parameter.
-The template shows an example without ORCID IDs for two of the authors.
-ORCID IDs should be provided in all cases.
+\section{User Guide}
 
-Each author's affiliations have to be provided in the author footer on the bottom-left corner of the first page.
-It is permitted to merge two or more people from the same institution as long as they are shown in the same order as in the overall author sequence on the top of the first page.
-For example, if authors A, B, C, and D are from institutions 1, 2, 1, and 2, respectively, then it is ok to use 2 bullets as follows:
+This Project is designed to be played in a seated manner. The User is not supposed to change their position during the duration of the playsession. The Chair should be placed in the middle of the playspace and should face to the front of the configured playspace of the HMDs software.
+
+\begin{figure}[tb]% specify a combination of t, b, p, or h for top, bottom, on its own page, or here
+  \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact)
+  \includegraphics[width=\columnwidth, alt={The view from the cabin of a excavator. Each hand is on the joystick for controlling the vehicles arms and body}]{ExcavatorCabinView}
+  \caption{%
+  	The View of the player during his VR experience%
+  }
+  \label{fig:cabin_view}
+\end{figure}
+
+\subsection{First Steps}
+After Startup the User is immediately placed into the drivers seat of their excavator. On the left and right console there is a grabbable joystick each and in front of the seat there are two levers. 
+
+The Controls of the excavator are based on the ISO Standard 10968. This Standard defines the following controls for the excavator:
+
 \begin{itemize}
-  \item A and C are with Institution 1. E-mail: \{a\,$|$\,c\}@i1.com\,.
-
-  \item B and D are with Institution 2. E-mail: \{b\,$|$\,d\}@i2.org\,.
+  \item The left joystick tilting left causes the excavators upper body to swing left
+  \item The left joystick tilting right causes the excavators upper body to swing right
+  \item The left joystick tilting forward causes the excavators dipper, also known as stick boom, to move away.
+           The Stick Boom of the excavator is the second half of the excavators arm, connecting the main boom with the bucket.
+  \item The left joystick tilting backwards causes the excavators stick boom, to move closer.
+  \item The right joystick tilting left causes the bucket of the excavator to curl in, therefore closing
+  \item The right joystick tilting right causes the bucket of the excavator to curl out. Thereby allowing for the bucket to dump its contents
+  \item The right joystick tilting forward causes the main boom and therefore the entire arm to go down
+  \item The right joystick tilting backwards causes the main boom to go back up 
+  \item The left lever in front of the seat defines the movement of the left track of the excavator. The further it gets tilted, the faster the track moves. If it gets tilted backwards, the track moves backwards instead.
+  \item The right lever in front of the seat defines the movement of the right track of the excavator. The further it gets tilted, the faster the track moves. If it gets tilted backwards, the track moves backwards instead.
 \end{itemize}
 
+Theoretically there is a second standard for the controls, SAE J1814, inverting the main and stick booms controls compared to ISO 10968, but for now the focus was put on the ISO standard.
 
-\section{Hyperlinks and Cross References}
+The interaction is possible by hovering over the object to be controlled with a hand and then pressing the controllers grip button. For the Track-Levers the forward or Backward movement of the hand is translated into the lever moving forward or backwards. For the Joysticks a different methodology had to be found, due to the translation of 360° Movement into a translatable rotation proved more difficult than first expected. Therefore the behavior for the joysticks was made to relay the rotation movement of the hand to the joystick. Thanks for the joysticks being rather small this solution works quite well. The smaller size of the Joystick would make moving ones hand further away and still controlling the joystick rather unrealistic and unintuitive in comparison to the larger Track-Levers.
 
-The style uses the \verb|hyperref| package which can typeset clickable hyperlinks using \verb|\href{...}{...}|, hyperlinked URLs using \verb|\url{...}|, and turns references into internal links.
+\section{Design}
 
-The style also uses \verb|cleveref| to automatically and consistently format cross references.
-We recommend that you use the \verb|\cref{label}| and \verb|\Cref{label}| calls instead of \verb|Figure~\ref{label}| or similar.
-\verb|\Cref| should be used when starting a sentence to spell out the reference (e.g.\ ``Section'') while \verb|\cref| should be used when referencing within a sentence to abbreviate (e.g.\ ``Sec.'').
-Here are examples for use within a sentence: \cref{fig:vis_papers}, \cref{tab:vis_papers}, \cref{sec:supplement_inst,sec:references_inst}, \cref{eq:sum}.
-The following sentences all start with a reference, so use \verb|\Cref|.
-\Cref{fig:vis_papers} is a \verb|figure| environment.
-\Cref{tab:vis_papers} is a \verb|table| environment.
-\Cref{sec:supplement_inst,sec:references_inst} are \verb|section| environments.
-\Cref{eq:sum} is an \verb|equation| environment.
+While a VR Project comes with alot of weaknesses inherent to the nature of the current hardware, it also provides alot of possibilities and strengths which are impossible to reproduce with other forms of media.
+The goal of this project was to use as many of the strengths whilst avoiding or mitigating the many pitfalls alot of VR software is commonly affected by, such as motion sickness or high latency with the interactions
 
 
-\section{Figures}
+\subsection{Keeping it simple}
 
-\subsection{Loading figures}
+Freedom often leads to confusion. Therefore the goal was to streamline the user experience in a way, where the user is not overwhelmed and neither completely left to their own devices. This is managed through a few smaller systems and design decisions
+
+
+\subsection{Seated like in reality}
+
+Due to the focus being on simulating an excavator operators experience the decision was made to keep the user in the same location at all times. Whilst movement is still allowed, to enable the user to for example look out of the window of the vehicle, there is no incentive to leave the seated area.
+
+This decision also avoids alot of issues concerning motion sickness. Due to the user being in a seated position and the velocity of the excavator being rather slow by nature, moving with the excavator is not nausea inducing and should therefore make the simulation alot more accessible to users with less to no experience with Virtual Reality.
+
+
+\begin{figure}[tb]% specify a combination of t, b, p, or h for top, bottom, on its own page, or here
+  \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact)
+  \includegraphics[width=\columnwidth, alt={The view from the cabin of a excavator. On one side there is a smaller hole, next to it lies a small heap of material, suggesting the excavator dug it out. the shovel is placed neatly on top of the heap}]{GroundDeformation}
+  \caption{%
+  	The View from the cabin after excavating a small hole and dumping material to create a small heap%
+  }
+  \label{fig:cabin_view}
+\end{figure}
+
+\subsection{The world confirms the excavators existance}
+
+One important aspect the simulation was of course the excavator buckets behavior. After all, getting a hang of the controls to move each component of an excavator effectively is only the beginning. Therefore it was essential to implement the most common task of excavators: The movement of material through an area by digging it away and dumping it somewhere else.
+
+Therefore it was important to make the shovel interact with the surrounding terrain of the excavator, allowing for it to create holes when digging and to dump material when opening the shovel over the terrain.
+
+
+\section{Implementation}
+
+
+
+\subsection{}
 
 The style automatically looks for image files with the correct extension (eps for regular \LaTeX; pdf, png, and jpg for pdf\LaTeX), in a set of given subfolders defined above using \verb|\graphicspath|: figures/, pictures/, images/.
 It is thus sufficient to use \verb|\includegraphics{CypressView}| (instead of \verb|\includegraphics{pictures/CypressView.jpg}|).
@@ -189,39 +228,6 @@ Other figures should begin on the second page.
 Papers submitted with figures other than the optional teaser on the first page will be refused.
 
 \subsection{Subfigures}
-
-You can add subfigures using the \texttt{subcaption} package that is automatically loaded.
-Inside a \verb|figure| environment, create a \verb|subfigure| environment.
-See \cref{fig:ex_subfigs} for an example.
-You can reference individual figures, either fully using \verb|\cref| (\cref{fig:ex_subfigs_a,fig:ex_subfigs_b}) or by letter using \verb|\subref|.
-E.g., \subref{fig:ex_subfigs_b}, \subref{fig:ex_subfigs_c}.
-Note that \verb|\subref| only works for one label at a time.
-
-\begin{figure}[tbp]
-  \centering
-  \begin{subfigure}[b]{0.45\columnwidth}
-  	\centering
-  	\includegraphics[width=\textwidth, alt={Big letter A on a gray background.}]{example-image-a}
-  	\caption{The letter A.}
-  	\label{fig:ex_subfigs_a}
-  \end{subfigure}%
-  \hfill%
-  \begin{subfigure}[b]{0.45\columnwidth}
-  	\centering
-  	\includegraphics[width=\textwidth, alt={Big letter B on a gray background.}]{example-image-b}
-  	\caption{The letter B.}
-  	\label{fig:ex_subfigs_b}
-  \end{subfigure}%
-  \\%
-  \begin{subfigure}[b]{0.45\columnwidth}
-  	\centering
-  	\includegraphics[width=\textwidth, alt={Big letter C on a gray background.}]{example-image-c}
-  	\caption{The letter C.}
-  	\label{fig:ex_subfigs_c}
-  \end{subfigure}%
-  \subfigsCaption{Example of adding subfigures with the \texttt{subcaption} package.}
-  \label{fig:ex_subfigs}
-\end{figure}
 
 \subsection{Figure Credits}
 \label{sec:figure_credits_inst}
@@ -291,16 +297,6 @@ Tables, such as \cref{tab:vis_papers} can also be included.
   	\bottomrule
   \end{tabu}%
 \end{table}
-
-\begin{figure}[tb]% specify a combination of t, b, p, or h for top, bottom, on its own page, or here
-  \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact)
-  \includegraphics[width=\columnwidth, alt={A line graph showing paper counts between 0 and 160 from 1990 to 2016 for 9 venues.}]{paper-count-2016}
-  \caption{%
-  	A visualization of the 1990--2016 data from \cref{tab:vis_papers}, recreated based on Fig.\ 1 from \cite{Isenberg2017Vispubdata.orgMetadataCollection}.%
-  }
-  \label{fig:vis_papers}
-\end{figure}
-
 
 \section{Supplemental Material Instructions}
 \label{sec:supplement_inst}
