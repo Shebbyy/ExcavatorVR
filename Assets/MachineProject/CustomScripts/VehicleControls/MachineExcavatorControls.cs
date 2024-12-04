@@ -128,7 +128,7 @@ namespace MachineProject.CustomScripts.VehicleControls
             // if the arm-Angle is > 180, the angle should be negative
             float armAngle = arm.transform.localEulerAngles.x;
             if (armAngle > 180)  {
-                armAngle -= - 360;
+                armAngle -= 360;
             }
             
             arm.transform.SetLocalPositionAndRotation(arm.transform.localPosition,
