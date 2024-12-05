@@ -56,7 +56,7 @@
 
 %% Abstract section.
 \abstract{%
-  This paper is focussed on the design and implementation of a fully simulated excavator-driving environment for the Oculus Rift-S. The Goal was to simulate the controls of a real excavator as accurately as possible.
+  This paper is focussed on the design and implementation of a fully simulated excavator driving environment for the Oculus Rift-S. The goal was to simulate the controls of a real excavator as accurately as possible.
 }
 
 %% Keywords that describe your work. Will show as 'Index Terms' in journal
@@ -120,12 +120,12 @@
 Over the years there have been many attempts trying to create training and demo simulators for different kinds of jobs. Virtual Reality provides an irreplacable opportunity to make the experience as realistic and easy to use as possible.
 Many different industries are already creating such software and distributing it, either for their customers or for their own employees. 
 
-Such software allows the users to train for a  job in a safe space where the risk of accidents can be severely reduced whilst the economical and health dangers surrounding these are minimized.
+Such software allows the users to train for a  job in a safe space where the risk of accidents can be severely reduced whilst the economical and health risks surrounding these are minimized.
 
 During the planning stage of this project, the severe lack of training software for the construction industry in particular really stuck out. 
 Therefore, in this context, the decision was made to create a small training simulator for excavator operators. Excavators have a comparatively high complexity for their controls compared to other construction vehicles, due to the simultaneous handling of multiple joysticks and levers. 
 
-Because of this, operators need alot of intuition and experience to use the machine effectively, which made this kind of vehicle the choice for this project.
+Because of this, operators need a lot of intuition and experience to use the machine effectively, which made this kind of vehicle the choice for this project.
 
 \section{User Guide}
 
@@ -160,15 +160,14 @@ The Controls of the excavator are based on the ISO Standard 10968. This Standard
   \item The left lever in front of the seat defines the movement of the left track of the excavator. The further it gets tilted, the faster the track moves. If it gets tilted backwards, the track moves backwards instead.
   \item The right lever in front of the seat defines the movement of the right track of the excavator. The further it gets tilted, the faster the track moves. If it gets tilted backwards, the track moves backwards instead.
 \end{itemize}
-
 Theoretically there is a second standard for the controls, SAE J1814, inverting the main and stick booms controls compared to ISO 10968, but for this project in particular, the focus was put on the ISO standard.
 
-The interaction is possible by hovering over whichever object should be selected with a hand and then pressing the HMD-controllers grip button. For most controllers this button is placed in a position, to naturally press it when gripping the controller more tightly. For the Track-Levers the forward or backward movement of the hand is translated into the lever moving forward or backwards. For the Joysticks a different methodology had to be found, due to the translation of 360° movement into a translatable rotation proved more difficult than first expected. Therefore the behavior for the joysticks was made to relay the rotation movement of the hand to the joystick. Due to the size of the joysticks being alot smaller compared to the levers, used for controlling the tracks,l this solution works quite well. The smaller size of the joystick would make moving ones hand further away and still controlling the joystick rather unrealistic and unintuitive in comparison to the larger Track-Levers.
+The interaction is possible by hovering over whichever object should be selected with a hand and then pressing the HMD controllers grip button. For most controllers this button is placed in a position, to naturally press it when gripping the controller more tightly. For the track levers the forward or backward movement of the hand is translated into the lever moving forward or backwards. For the Joysticks a different methodology had to be found, due to the translation of 360° movement into a translatable rotation proved more difficult than first expected. Therefore the behavior for the joysticks was made to relay the rotation movement of the hand to the joystick. Due to the size of the joysticks being a lot smaller compared to the levers, used for controlling the tracks, this solution works quite well. The smaller size of the joystick would make moving ones hand further away and still controlling the joystick rather unrealistic and unintuitive in comparison to the larger track levers.
 
 \section{Design}
 
 While a VR Project comes with a lot of weaknesses inherent to the nature of the current hardware, it also provides many possibilities and strengths which are impossible to reproduce with other forms of media.
-The goal of this project was to use as many of the strengths whilst avoiding or mitigating the many pitfalls alot of VR software is commonly affected by, such as motion sickness or high latency with the interactions
+The goal of this project was to use as many of the strengths whilst avoiding or mitigating the many pitfalls a lot of VR software is commonly affected by, such as motion sickness or high latency with the interactions
 
 
 \subsection{Keeping it simple}
@@ -180,7 +179,7 @@ Freedom often leads to confusion. Therefore the goal was to streamline the user 
 
 Due to the focus being on simulating an excavator operators experience the decision was made to keep the user in the same location at all times. Whilst movement is still allowed, to enable the user to, for example, look out of the window of the vehicle. There is no incentive to leave the seated area.
 
-This decision also avoids alot of issues concerning motion sickness. Due to the user being in a seated position and the velocity of the excavator being rather slow by nature, moving with the excavator is not nausea inducing and should therefore make the simulation alot more accessible to users with less to no experience with Virtual Reality.
+This decision also avoids a lot of issues concerning motion sickness. Due to the user being in a seated position and the velocity of the excavator being rather slow by nature, moving with the excavator is not nausea inducing and should therefore make the simulation a lot more accessible to users with less to no experience with Virtual Reality.
 
 
 \begin{figure}[tb]% specify a combination of t, b, p, or h for top, bottom, on its own page, or here
@@ -200,17 +199,17 @@ This could be achieved by enabling the shovel to interact with the surrounding t
 
 
 \section{Implementation}
-For this project there are both generic scripts and vehicle-control scripts. Whilst the generic scripts can be partially reused in other usecases the contents of the vehicle-controls are exclusively usable for vehicle controls.
+For this project there are both generic scripts and vehicle control scripts. Whilst the generic scripts can be partially reused in other usecases the contents of the vehicle controls are exclusively usable for vehicle controls.
 
-The logic for moving the track of the excavator was abstracted into its own class. In case the program is to be expanded in the future with further track-based vehicles, the class could be used as a basis.
+The logic for moving the track of the excavator was abstracted into its own class. In case the program is to be expanded in the future with further track based vehicles, the class could be used as a basis.
 
 
 \subsection{Track Lever Spring behavior} \label{trackLeverSpringBehavior}
-This script is used for the track-levers. In reality, after letting go of the lever, it slowly moves back to its initial position. After some initial attempts to accomplish this behavior using the spring-feature of the Unity-Default Hinge-Joints, it was discovered, that due to the levers being kinetic rigidbodies, the spring behavior would not work properly. 
+This script is used for the track levers. In reality, after letting go of the lever, it slowly moves back to its initial position. After some initial attempts to accomplish this behavior using the spring feature of the Unity default hinge joints, it was discovered, that due to the levers being kinetic rigidbodies, the spring behavior would not work properly. 
 
-Because of this, the behavior had to be implemented by hand. The created script also allows for the hand to snap to the lever upon grabbing it and lets go of it, if the grab-interaction ends.
+Because of this, the behavior had to be implemented by hand. The created script also allows for the hand to snap to the lever upon grabbing it and lets go of it, if the grab interaction ends.
 
-To smooth out the spring-functionality, the rotation of the lever is changed with linear interpolation.
+To smooth out the spring functionality, the rotation of the lever is changed with linear interpolation.
 
 
 \subsection{Terrain Manipulation}
@@ -223,18 +222,17 @@ To determine, if the shovel is currently interacting with the terrain a raycast 
 \begin{itemize}
   \item If the raycast distance was incredibly short, the script assumes the shovel is currently touching the terrain, therefore it starts lowering the terrain around the area the raycast hit.
   \item The raycast had a measurable distance, but the bucket is currently not opened into the direction of the ground, therefore any further behavior is stopped for this frame, since the bucket is not currently dumping any material
-  \item The raycast had a measurable distance and the bucket is currently open. This suggests the excavator is currently dumping material. Therefore the terrain gets raised around the raycast-hit-position.
+  \item The raycast had a measurable distance and the bucket is currently open. This suggests the excavator is currently dumping material. Therefore the terrain gets raised around the raycast hit position.
 \end{itemize}
+To manipulate the terrain the script must begin by translating the world position of the raycast target into the local position of the terrain. 
 
-To manipulate the terrain the script must begin by translating the world position of the raycast-target into the local position of the terrain. 
+After that is completed, the heightmap of the terrain around the calculated local position of the raycast target gets adjusted, either raised or lowered by a fixed value. To keep the increase independant of the framerate the constant manipulation strength gets multiplied by the time difference from the last frame to the current one.
 
-After that is completed, the heightmap of the terrain around the calculated local position of the raycast-target gets adjusted, either raised or lowered by a fixed value. To keep the increase independant of the framerate the constant manipulation-strength gets multiplied by the time difference from the last frame to the current one.
-
-Additionally to provide additional feedback for the user, the texture of manipulated terrain changes to a dirt-like texture, to make smaller terraforming-changes stick out a bit more.
+Additionally to provide additional feedback for the user, the texture of manipulated terrain changes to a dirt like texture, to make smaller terraforming changes stick out a bit more.
 
 \begin{figure}[h]% specify a combination of t, b, p, or h for top, bottom, on its own page, or here
   \centering % avoid the use of \begin{center}...\end{center} and use \centering instead (more compact)
-  \includegraphics[width=0.45\textwidth, alt={A Top-Down View of the track-base of the excavator with a few circles and radius showing the different values required for calculating the skid steering rotation}]{TrackBase}
+  \includegraphics[width=0.45\textwidth, alt={A Top-Down View of the track base of the excavator with a few circles and radius showing the different values required for calculating the skid steering rotation}]{TrackBase}
   \caption{%
   	A small sketch showing the different values required for the skid steering calculation visually%
   }
@@ -244,11 +242,11 @@ Additionally to provide additional feedback for the user, the texture of manipul
 
 For the Logic of the track movement, the algorithm requires two lever gameobjects whose rotation is then used to calculate the speed for both of the tracks. This speed is then used to calculate the rotation and distance to move the vehicle.
 
-These levers are then checked for their angle on every frame and the angle gets converted into a relative speed value with their max-angle being the maximum speed and an angle of 0 being a speed of 0.
+These levers are then checked for their angle on every frame and the angle gets converted into a relative speed value with their max angle being the maximum speed and an angle of zero being a speed of zero.
 
-In case both levers have a similar rotation a straight forward movement can be achieved, Otherwise the deviation from the course needs to be calculates. For that the radius of the inner track of the rotation needs to be calculated. This can be achieved by taking the width between both sides of the vehicle and dividing it by the relative speed of the fast to the slow track - 1. Afterwards the speed of the outer track needs to be divided through the calculated radius with the width between both sides of the vehicle added to it. This calculates the degree value on how far the excavator needs to be rotated.
+In case both levers have a similar rotation a straight forward movement can be achieved, Otherwise the deviation from the course needs to be calculates. For that the radius of the inner track of the rotation needs to be calculated. This can be achieved by taking the width between both sides of the vehicle and dividing it by the relative speed of the fast to the slow track - one. Afterwards the speed of the outer track needs to be divided through the calculated radius with the width between both sides of the vehicle added to it. This calculates the degree value on how far the excavator needs to be rotated.
 
-From that rotation value the algorithm can then also calculate the distance the vehicle is supposed to move forward to simulate the different rotation center-point, by multiplying it with the sinus-value
+From that rotation value the algorithm can then also calculate the distance the vehicle is supposed to move forward to simulate the different rotation center point, by multiplying it with the sinus value
 
 \subsection{Translating hand rotation to joystick rotation}
 
@@ -260,23 +258,23 @@ For this logic a few requirements had to be considered whenever this behavior sh
   \item If both hands grip two joysticks, the translation needs to work for both of them simultaneously
 \end{itemize}
 
-Whenever a joystick is gripped, the rotation of the current hand is collected and compared with the last update of the joysticks rotation. The difference of the rotation is then applied to the joystick. Once again, a similar functionality to the track-lever spring behavior, from subsection \ref{trackLeverSpringBehavior} on page \pageref{trackLeverSpringBehavior}, is implemented here, with the only difference being, that this script considers both the x and y axis.
+Whenever a joystick is gripped, the rotation of the current hand is collected and compared with the last update of the joysticks rotation. The difference of the rotation is then applied to the joystick. Once again, a similar functionality to the track lever spring behavior, from subsection \ref{trackLeverSpringBehavior} on page \pageref{trackLeverSpringBehavior}, is implemented here, with the only difference being, that this script considers both the x and y axis.
 
-With this translation the z-axis  is deliberately kept consistent to keep the later translation in the excavator behavior simpler.
+With this translation the z axis  is deliberately kept consistent to keep the later translation in the excavator behavior simpler.
 
 \subsection{Translating joystick rotation into excavator movements}
 
-For this translation each axis of the joysticks are handled seperately. The relative speed is calculated by the angle of the joystick and it is then used to add or reduce the current rotation-value of the axis to be manipulated for each component of the excavator. In the case of the stick-boom and for the bucket, the velocity needs to be inverted, as a forward movement is seen as a positive rotation change, but the rotation should actually change into the negative.
+For this translation each axis of the joysticks are handled seperately. The relative speed is calculated by the angle of the joystick and it is then used to add or reduce the current rotation value of the axis to be manipulated for each component of the excavator. In the case of the stick boom and for the bucket, the velocity needs to be inverted, as a forward movement is seen as a positive rotation change, but the rotation should actually change into the negative.
 
 To avoid any motion sickess during the excavator body swing or any snappy reactions of the excavator the movement needs to be smooth. The change of the rotation is therefore once again applied with a linear interpolation to smooth out the movement.
 
 \section{Future Improvements}
 
-As of now the projects serves as a nice proof of concept and a small tech demo. Therefore there are alot of features to be added or further polished.
+As of now the projects serves as a nice proof of concept and a small tech demo. Therefore there are a lot of features to be added or further polished.
 
-One of those features would be the correct placement of the hands when grabbing the track-levers. Currently they snap to the basis of the lever, sadly some experimentation with the attachment offset of the hand assets did not prove successful, but it would prove to be a great improvement.
+One of those features would be the correct placement of the hands when grabbing the track levers. Currently they snap to the basis of the lever, sadly some experimentation with the attachment offset of the hand assets did not prove successful, but it would prove to be a great improvement.
 
-Currently there is also the missing logic of a bucket fill-state, currently you can remove and dump infinite material from the bucket, a limit on how much the bucket can remove before it needs to be dumped and a fill-state for the bucket with visualization would surely improve the realism and make for a great improvement
+Currently there is also the missing logic of a bucket fill state, currently you can remove and dump infinite material from the bucket, a limit on how much the bucket can remove before it needs to be dumped and a fill state for the bucket with visualization would surely improve the realism and make for a great improvement
 
 Other than that this project provides a great basis to implement further vehicles to drive, like a dumper, a dozer or maybe even a crane.
 
